@@ -81,7 +81,7 @@ function resize(){
   camera.aspect = window.innerWidth / window.innerHeight;
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.updateProjectionMatrix();
-  console.log("The window size has changed");
+  // console.log("The window size has changed");
 }
 
 function Controller(){
