@@ -87,7 +87,7 @@ function resize(){
 function animate() {
   step += 0.2;
 
-  sphere.position.y = Math.sin(step)* 10;
+  sphere.position.y = 4 + Math.abs(Math.sin(step)* 10);
 
   renderer.render(scene, camera);
   // console.log("animate!");
