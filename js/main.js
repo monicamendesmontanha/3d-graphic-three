@@ -94,10 +94,21 @@ function addGui() {
   const gui = new dat.GUI();
   gui.add(controller, 'rotationSpeed', 0, 0.3);
   gui.add(controller, 'bouncingSpeed', 0, 0.5);
+}
 
+function addStats() {
+  const stats = new Stats();
+  stats.setMode(0);
+  // console.log(stats);
+  stats.domElement.style.position = 'absolute';
+  stats.domElement.style.left = '0px';
+  stats.domElement.style.top = '0px';
+  return stats;
 }
 
 function animate() {
+  stats.update();
+
   step += controller.bouncingSpeed;
 
   sphere.position.x = 20 + 10 * Math.cos(step);
@@ -141,6 +152,9 @@ function init() {
     camera,
     renderer.domElement,
   )
+
+  stats = addStats();
+  document.getElementById('stats').appendChild(stats.domElement);
 
   document.body.appendChild(renderer.domElement);
 
