@@ -38,6 +38,36 @@ function createFloor(){
   return floor;
 }
 
+function createBox(x, y, z, color){
+  const cubeMaterial = new THREE.MeshLambertMaterial({
+    color,
+    wireframe: true,
+  });
+  const cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
+  const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+  cube.castShadow = true;
+  cube.receiveShadow = true;
+  cube.position.set(x, y, z);
+  return cube;
+}
+
+function createSphere(){
+  const sphereMaterial = new THREE.MeshLambertMaterial({
+    color: '#039be5',
+    wireframe: true,
+  })
+  const sphereGeometry = new THREE.SphereGeometry(
+    4,  // radius
+    30, // width segment
+    30, // height segment
+  )
+  const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+  sphere.castShadow = true;
+  sphere.receiveShadow = true;
+  sphere.position.set(20, 4, 0);
+  return sphere;
+}
+
 function createLight() {
   const light = new THREE.PointLight('#ffffff');
   light.castShadow = true;
@@ -58,8 +88,16 @@ function init() {
   floor = createFloor();
   scene.add(floor);
 
+  cube = createBox(-4, 4, 0, '#ff8f00');
+  scene.add(cube);
+
+  sphere = createSphere();
+  scene.add(sphere);
+
   light = createLight();
   scene.add(light);
+  const pointLightHelper = new THREE.PointLightHelper(light);
+  scene.add(pointLightHelper);
 
   document.body.appendChild(renderer.domElement);
 
