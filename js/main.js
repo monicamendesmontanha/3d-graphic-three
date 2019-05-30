@@ -90,6 +90,10 @@ function animate() {
   sphere.position.x = 20 + 10 * Math.cos(step);
   sphere.position.y = 4 + Math.abs(Math.sin(step)* 10);
 
+  cube.rotation.x += 0.02;
+  cube.rotation.y += 0.02;
+  cube.rotation.z += 0.02;
+
   renderer.render(scene, camera);
   // console.log("animate!");
   requestAnimationFrame(animate);
