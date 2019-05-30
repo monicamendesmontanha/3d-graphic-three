@@ -41,7 +41,7 @@ function createFloor(){
 function createBox(x, y, z, color){
   const cubeMaterial = new THREE.MeshLambertMaterial({
     color,
-    wireframe: true,
+    // wireframe: true,
   });
   const cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
   const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
@@ -54,7 +54,7 @@ function createBox(x, y, z, color){
 function createSphere(){
   const sphereMaterial = new THREE.MeshLambertMaterial({
     color: '#039be5',
-    wireframe: true,
+    // wireframe: true,
   })
   const sphereGeometry = new THREE.SphereGeometry(
     4,  // radius
@@ -84,6 +84,16 @@ function resize(){
   console.log("The window size has changed");
 }
 
+function animate() {
+  step += 0.2;
+
+  sphere.position.y = Math.sin(step)* 10;
+
+  renderer.render(scene, camera);
+  // console.log("animate!");
+  requestAnimationFrame(animate);
+}
+
 function init() {
   renderer = createRenderer();
   scene = new THREE.Scene();
@@ -106,9 +116,15 @@ function init() {
   const pointLightHelper = new THREE.PointLightHelper(light);
   scene.add(pointLightHelper);
 
+  const controls = new THREE.OrbitControls(
+    camera,
+    renderer.domElement,
+  )
+
   document.body.appendChild(renderer.domElement);
 
-  renderer.render(scene, camera);
+  // renderer.render(scene, camera);
+  animate()
 }
 
 window.onload = init;
