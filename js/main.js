@@ -84,15 +84,28 @@ function resize(){
   console.log("The window size has changed");
 }
 
+function Controller(){
+  // console.log(this)
+  this.rotationSpeed = 0.02;
+  this.bouncingSpeed = 0.05;
+}
+
+function addGui() {
+  const gui = new dat.GUI();
+  gui.add(controller, 'rotationSpeed', 0, 0.3);
+  gui.add(controller, 'bouncingSpeed', 0, 0.5);
+
+}
+
 function animate() {
-  step += 0.2;
+  step += controller.bouncingSpeed;
 
   sphere.position.x = 20 + 10 * Math.cos(step);
   sphere.position.y = 4 + Math.abs(Math.sin(step)* 10);
 
-  cube.rotation.x += 0.02;
-  cube.rotation.y += 0.02;
-  cube.rotation.z += 0.02;
+  cube.rotation.x += controller.rotationSpeed;
+  cube.rotation.y += controller.rotationSpeed;
+  cube.rotation.z += controller.rotationSpeed;
 
   renderer.render(scene, camera);
   // console.log("animate!");
@@ -120,6 +133,9 @@ function init() {
   scene.add(light);
   const pointLightHelper = new THREE.PointLightHelper(light);
   scene.add(pointLightHelper);
+
+  controller = new Controller();
+  const gui = addGui(controller);
 
   const controls = new THREE.OrbitControls(
     camera,
