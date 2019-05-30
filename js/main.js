@@ -52,6 +52,9 @@ function init() {
   scene = new THREE.Scene();
   camera = new createCamera();
 
+  const axes = new THREE.AxesHelper(100);
+  scene.add(axes);
+
   floor = createFloor();
   scene.add(floor);
 
